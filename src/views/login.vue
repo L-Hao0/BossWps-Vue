@@ -18,7 +18,7 @@
 </template>
 
 <script>
-/* import ribbon from '../components/ribbon.js' */
+// import ribbon from '../components/ribbon.js' 
 import dialog from "../components/js/dialog.js"
 import qs from 'qs'
 import axios from 'axios'
@@ -48,8 +48,9 @@ export default {
 			if(resp.data.msg==null){
 			alert("登录成功");
 			localStorage.setItem("token", resp.data.result.token);//保存令牌
-			this.tiaozhuan('menued');//执行点击事件
+			this.tiaozhuan("menued");//执行点击事件
 			window.opener=null;window.open('','_self');window.close();//关闭
+			
 			}else{
 				this.$message.error(resp.data.msg);
 			}

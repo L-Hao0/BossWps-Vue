@@ -45,15 +45,15 @@ function onbuttonclick(idStr, param) {
             break
         }
 		case "menued": {
-		    let tsId = wps.PluginStorage.getItem("taskpane_id")
-		    if (!tsId) {
-		        let tskpane = wps.CreateTaskPane(Util.GetUrlPath() + "menued")
-		        let id = tskpane.ID
-		        wps.PluginStorage.setItem("taskpane_id", id)
-		        tskpane.Visible = true
+		    let tsId2 = wps.PluginStorage.getItem("taskpane_id2")
+		    if (!tsId2) {
+		        let tskpane2 = wps.CreateTaskPane(Util.GetUrlPath() + "menued")
+		        let id2 = tskpane2.ID
+		        wps.PluginStorage.setItem("taskpane_id2", id2)
+		        tskpane2.Visible = true
 		    } else {
-		        let tskpane = wps.GetTaskPane(tsId)
-		        tskpane.Visible = true
+		        let tskpane2 = wps.GetTaskPane(tsId2)
+		        tskpane2.Visible = !tskpane2.Visible
 		    }
 		    break
 		}

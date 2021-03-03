@@ -1,5 +1,6 @@
 import Util from './js/util.js'
 import SystemDemo from './js/systemdemo.js'
+import dialog from "../components/js/dialog.js"
 
 //这个函数在整个wps加载项中是第一个执行的
 function OnAddinLoad(ribbonUI){
@@ -20,9 +21,9 @@ function OnAddinLoad(ribbonUI){
     return true
 }
 
-var WebNotifycount = 0;
+// var WebNotifycount = 0;
 function OnAction(control) {
-    const eleId = control.Id
+    const eleId = control.Id;
     switch (eleId) {
         case "btnShowMsg":
             {
@@ -49,18 +50,9 @@ function OnAction(control) {
         case "btnShowDialog":
             wps.ShowDialog(Util.GetUrlPath() + "dialog", "这是一个对话框网页", 400 * window.devicePixelRatio, 400 * window.devicePixelRatio, false)
             break
-        case "btnShowTaskPane":
+        case "menued":
             {
-                let tsId = wps.PluginStorage.getItem("taskpane_id")
-                if (!tsId) {
-                    let tskpane = wps.CreateTaskPane(Util.GetUrlPath() + "taskpane")
-                    let id = tskpane.ID
-                    wps.PluginStorage.setItem("taskpane_id", id)
-                    tskpane.Visible = true
-                } else {
-                    let tskpane = wps.GetTaskPane(tsId)
-                    tskpane.Visible = !tskpane.Visible
-                }
+                dialog.onbuttonclick("menued")
             }
             break
         case "btnApiEvent":
@@ -78,16 +70,12 @@ function OnAction(control) {
                 wps.ribbonUI.InvalidateControl("btnApiEvent") 
             }
             break
-        case "btnWebNotify":
+        case "denglu":
             {
-                let currentTime = new Date()
-                let timeStr = currentTime.getHours() + ':' + currentTime.getMinutes() + ":" + currentTime.getSeconds()
-                wps.OAAssist.WebNotify("这行内容由wps加载项主动送达给业务系统，可以任意自定义, 比如时间值:" + timeStr + "，次数：" + (++WebNotifycount), true)
+                wps.ShowDialog(Util.GetUrlPath() + "login", "欢迎登录", 900 * window.devicePixelRatio, 600 * window.devicePixelRatio, false)
             }
             break
-		case "denglu"://调用登录窗口
-		    wps.ShowDialog(Util.GetUrlPath() + "login", "欢迎登录", 900 * window.devicePixelRatio, 600 * window.devicePixelRatio, false)
-		     break
+
         default:
             break
     }
@@ -155,6 +143,7 @@ function OnGetLabel(control){
 function OnNewDocumentApiEvent(doc){
     alert("新建文件事件响应，取文件名: " + doc.Name)
 }
+
 
 //这些函数是给wps客户端调用的
 export default {
