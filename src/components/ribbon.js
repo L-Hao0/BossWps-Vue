@@ -101,12 +101,12 @@ function OnGetEnabled(control) {
     switch (eleId) {
         case "btnShowMsg":
             return true
-        case "btnShowDialog":
-            {
-                let bFlag = wps.PluginStorage.getItem("EnableFlag")
-                return bFlag
-            }
-        case "btnShowTaskPane":
+        // case "btnShowDialog":
+        //     {
+        //         let bFlag = wps.PluginStorage.getItem("EnableFlag")
+        //         return bFlag
+        //     }
+        case "menued":
             {
                 let bFlag = wps.PluginStorage.getItem("EnableFlag")
                 return bFlag
