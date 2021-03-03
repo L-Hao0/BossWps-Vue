@@ -1,93 +1,102 @@
 <template>
 	<div>
-		<el-tree :props="props" :load="loadNode" lazy show-checkbox @check-change="handleCheckChange"></el-tree>
-	</div>
+		<div>
+			<el-tree :data="dataMenu" show-checkbox node-key="id" :default-expanded-keys="[2, 3]" :default-checked-keys="[5]" :props="defaultProps">
+			</el-tree>
+		</div>
+		<div>
+			
+		</div>
+	</div>	
 </template>
 
 <script>
-/* 	import qs from 'qs' */
+	/* 	import qs from 'qs' */
 	import axios from 'axios'
 	import Vue from 'vue';
 	export default {
 		name: 'menued',
 		data() {
 			return {
-				props: {
-					label: 'name',
-					children: 'zones'
+				form: {
+					token: ''
 				},
-				count: 1,
-				form:{
-					token:''
+				dataMenu: [{
+					name: 'asd',
+
+				}],
+				data: [{
+					id: 1,
+					label:'一级 2' ,
+					children: [{
+						id: 4,
+						label: '二级 1-1',
+						children: [{
+							id: 9,
+							label: '三级 1-1-1'
+						}, {
+							id: 10,
+							label: '三级 1-1-2'
+						}]
+					}]
+				}, {
+					id: 2,
+					label: '一级 2',
+					children: [{
+						id: 5,
+						label: '二级 2-1'
+					}, {
+						id: 6,
+						label: '二级 2-2'
+					}]
+				}, {
+					id: 3,
+					label: '一级 3',
+					children: [{
+						id: 7,
+						label: '二级 3-1'
+					}, {
+						id: 8,
+						label: '二级 3-2'
+					}]
+				}],
+				defaultProps: {
+					children: 'children',
+					label: 'label'
 				},
+				namee:'',
 				
 			}
+			
 		},
 		methods: {
-			handleCheckChange(data, checked, indeterminate) {
-				console.log(data, checked, indeterminate);
-			},
-			handleNodeClick(data) {
-				console.log(data);
-			},
-			loadNode(node, resolve) {
-				if (node.level === 0) {
-					return resolve([{
-						name: 'region1'
-						}, {
-						name: 'region2'
-					}]);
-				}
-				if (node.level > 3) return resolve([]);
 
-				var hasChild;
-				if (node.data.name === 'region1') {
-					hasChild = true;
-				} else if (node.data.name === 'region2') {
-					hasChild = false;
-				} else {
-					hasChild = Math.random() > 0.5;
-				}
-
-				setTimeout(() => {
-					var data;
-					if (hasChild) {
-						data = [{
-							name: 'zone' + this.count++
-						}, {
-							name: 'zone' + this.count++
-						}];
-					} else {
-						data = [];
-					}
-
-					resolve(data);
-				}, 300);
-			}
 		},
 		mounted() {
 			axios.get('/.debugTemp/NotifyDemoUrl').then((res) => {
 				this.DemoSpan = res.data;
 			});
-		},   
-		created:function(){//钩子函数
+		},
+		created: function() { //钩子函数
 			Vue.config.token = localStorage.getItem('token');
+			/* console.log(Vue.config.token) */
 			axios.defaults.headers = {
 				'X-Requested-With': 'XMLHttpRequest',
 				'Access-Control-Allow-Origin': true,
-				'Token': Vue.config.token}
+				'Token': Vue.config.token
+			}
 			axios.get('api/dpass/openApi/getApiList') //获取接口
-				.then(function (response) {
+				.then(resp => {
 					// handle success
-					console.log(response);
+					/* console.log(resp); */
+					this.dataMenu = resp.data.result;
+					console.log();
+					this.name=this.dataMenu[0].name;
 				})
-				.catch(function (error) {
+				.catch(resp => {
 					// handle error
-					console.log(error);
-				})
-				.then(function () {
-					// always executed
-			});
+					console.log(resp);
+				});
 
 		}
 	}
