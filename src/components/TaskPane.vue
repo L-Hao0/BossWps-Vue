@@ -16,17 +16,38 @@
             <button style="margin:3px;" @click="onbuttonclick('addString')">文档开头添加字符串</button>
             <button style="margin:3px;" @click="onDocNameClick()">取文件名</button>
         </div>
-        <hr>
+        <hr> 
         <div class="divItem">文档文件名为：<span>{{docName}}</span></div>
     </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 import taskPane from './js/taskpane.js'
+
 export default {
   name: 'TaskPane',
+
   data(){
+    Vue.config.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJHUERJIiwiZXhwIjoxNjE0NTczOTExLCJpYXQiOjE2MTQ1NjY3MTEsInVzZXJuYW1lIjoiY2xvdWQifQ.EF0BJpA_POsIcGiPdcT5nA-tY6ZrOBIgB34iJVQNOwU'
+    axios.defaults.headers = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Access-Control-Allow-Origin': true,
+        'Token': Vue.config.token}
+    axios.get('/api/dpass/openApi/getApiList?pageNo=1&pageSize=20') //获取接口
+        .then(function (response) {
+            // handle success
+            console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+    });
+
       return {
           DemoSpan : '',
           docName: ''

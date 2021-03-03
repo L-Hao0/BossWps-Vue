@@ -31,7 +31,7 @@ function OnAction(control) {
                     alert("当前没有打开任何文档")
                     return
                 }
-                alert(doc.Name)
+                alert(doc.Name) 
             }
             break;
         case "btnIsEnbable":
@@ -85,6 +85,9 @@ function OnAction(control) {
                 wps.OAAssist.WebNotify("这行内容由wps加载项主动送达给业务系统，可以任意自定义, 比如时间值:" + timeStr + "，次数：" + (++WebNotifycount), true)
             }
             break
+		case "denglu"://调用登录窗口
+		    wps.ShowDialog(Util.GetUrlPath() + "login", "欢迎登录", 900 * window.devicePixelRatio, 600 * window.devicePixelRatio, false)
+		     break
         default:
             break
     }
@@ -163,3 +166,7 @@ export default {
     OnGetLabel,
     OnNewDocumentApiEvent
 };
+
+
+
+

@@ -12,7 +12,7 @@ function onbuttonclick(idStr, param)
             if (tsId){
                 let tskpane = wps.GetTaskPane(tsId)
                 tskpane.DockPosition = wps.Enum.msoCTPDockPositionLeft
-            }
+            } 
             break
             }
         case "dockRight":{

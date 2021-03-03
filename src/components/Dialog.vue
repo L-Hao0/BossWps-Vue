@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import dlgFunc from './js/dialog.js'
+import dlgFunc from './js/dialog.js' //引入外部js
 import axios from 'axios'
 export default {
   name: 'Dialog',
@@ -35,7 +35,7 @@ export default {
       }
   },
   methods:{
-      onbuttonclick(id){
+      onbuttonclick(id){//调用js的点击事件
           return dlgFunc.onbuttonclick(id)
       },
       onDocNameClick(){

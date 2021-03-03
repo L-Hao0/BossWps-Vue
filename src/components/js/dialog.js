@@ -44,6 +44,19 @@ function onbuttonclick(idStr, param) {
                 doc.Close()
             break
         }
+		case "menued": {
+		    let tsId = wps.PluginStorage.getItem("taskpane_id")
+		    if (!tsId) {
+		        let tskpane = wps.CreateTaskPane(Util.GetUrlPath() + "menued")
+		        let id = tskpane.ID
+		        wps.PluginStorage.setItem("taskpane_id", id)
+		        tskpane.Visible = true
+		    } else {
+		        let tskpane = wps.GetTaskPane(tsId)
+		        tskpane.Visible = true
+		    }
+		    break
+		}
         case "openWeb": {
             wps.OAAssist.ShellExecute(param)
             break
