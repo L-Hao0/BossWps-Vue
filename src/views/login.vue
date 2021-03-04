@@ -42,22 +42,6 @@ export default {
 					username: this.ruleForm.username,
 					password: md5Pwd
 				}
-				var data = qs.stringify(rFoem);
-				axios.post(url, data).then(resp => {
-					if (resp.data.msg == null) {
-						alert("登录成功")
-						localStorage.setItem("token", resp.data.result.token); //保存令牌
-						this.tiaozhuan('menued'); //执行点击事件
-						window.opener = null;
-						window.open('', '_self');
-						window.close(); //关闭
-					} else {
-						this.$message.error(resp.data.msg);
-					}
-					console.log(resp); //后台返回的相应Json数据 
-				}).catch(resp => {
-					console.log(resp);
-				});
 			var data=qs.stringify(rFoem);
 			axios.post(url,data).then(resp=>{
 			if(resp.data.msg==null){
@@ -71,7 +55,7 @@ export default {
 			}else{
 				this.$message.error(resp.data.msg);
 			}
-			console.log(resp);//后台返回的相应Json数据 
+			console.log(resp);//后台返回的相应Json数据 啥
 			}).catch(resp=>{
 				console.log(resp);
 			});
