@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-			<el-tree :data="dataMenu" show-checkbox node-key="id"   :props="defaultProps">
+			<el-tree :data="data" show-checkbox node-key="label"   :props="defaultProps">
 			</el-tree>
 		</div>
 		<div id="app"> 
@@ -59,7 +59,7 @@
 				}],
 				defaultProps: {
 					children: 'children',
-					label: name
+					label: 'name'
 				}
 			}
 			
@@ -100,4 +100,3 @@
 <style scoped>
 
 </style>
-t
