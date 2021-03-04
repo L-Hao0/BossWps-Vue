@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<div>
-			<el-tree :data="dataMenu" show-checkbox node-key="id" :default-expanded-keys="[2, 3]" :default-checked-keys="[5]" :props="defaultProps">
+			<el-tree :data="dataMenu" show-checkbox node-key="id"   :props="defaultProps">
 			</el-tree>
 		</div>
-		<div>
-			
+		<div id="app"> 
+			<p v-for="i in dataMenu" :key='i'>{{i.name}}</p>
 		</div>
 	</div>	
 </template>
@@ -21,10 +21,7 @@
 				form: {
 					token: ''
 				},
-				dataMenu: [{
-					name: 'asd',
-
-				}],
+				dataMenu: [],
 				data: [{
 					id: 1,
 					label:'一级 2' ,
@@ -62,10 +59,8 @@
 				}],
 				defaultProps: {
 					children: 'children',
-					label: 'label'
-				},
-				namee:'',
-				
+					label: name
+				}
 			}
 			
 		},
@@ -90,13 +85,12 @@
 					// handle success
 					/* console.log(resp); */
 					this.dataMenu = resp.data.result;
-					console.log();
-					this.name=this.dataMenu[0].name;
 				})
 				.catch(resp => {
 					// handle error
 					console.log(resp);
 				});
+			
 
 		}
 	}

@@ -18,18 +18,17 @@
 </template>
 
 <script>
-	/* import ribbon from '../components/ribbon.js' */
-	import dialog from "../components/js/dialog.js"
-	import qs from 'qs'
-	import axios from 'axios'
-	export default {
-		name: 'login',
-		data() {
-			return {
-				msg: '登录页面',
-				ruleForm: {
-					username: 'cloud',
-					password: '123456'
+import dialog from "../components/js/dialog.js"
+import qs from 'qs'
+import axios from 'axios'
+export default {
+  name: 'login',
+  data(){
+      return {
+          msg:'登录页面',
+			ruleForm:{
+			username:'cloud',
+			password:'123456'
 				},
 				dialogVisible: false
 			}
@@ -59,6 +58,23 @@
 				}).catch(resp => {
 					console.log(resp);
 				});
+			var data=qs.stringify(rFoem);
+			axios.post(url,data).then(resp=>{
+			if(resp.data.msg==null){
+			alert("登录成功");
+			localStorage.setItem("token", resp.data.result.token);//保存令牌
+			this.tiaozhuan("menued");//执行点击事件
+			wps.PluginStorage.setItem("EnableFlag", 1)
+			wps.ribbonUI.InvalidateControl("menued")
+			window.opener=null;window.open('','_self');window.close();//关闭
+			
+			}else{
+				this.$message.error(resp.data.msg);
+			}
+			console.log(resp);//后台返回的相应Json数据 
+			}).catch(resp=>{
+				console.log(resp);
+			});
 			},
 			tiaozhuan: function(id) {
 				return dialog.onbuttonclick(id); //跳转事件
