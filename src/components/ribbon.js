@@ -72,10 +72,20 @@ function OnAction(control) {
             break
         case "denglu":
             {
+                localStorage.removeItem("token") 
                 wps.ShowDialog(Util.GetUrlPath() + "login", "欢迎登录", 900 * window.devicePixelRatio, 600 * window.devicePixelRatio, false)
             }
             break
-
+        case "logout":
+            {
+                localStorage.removeItem("token") 
+                wps.PluginStorage.setItem("EnableFlag",!-1)
+                //通知wps刷新以下几个按饰的状态
+                wps.ribbonUI.InvalidateControl("menued")
+                wps.ribbonUI.InvalidateControl("logout")
+                wps.ribbonUI.InvalidateControl("denglu") 
+            }
+            break
         default:
             break
     }
@@ -99,7 +109,7 @@ function GetImage(control) {
 function OnGetEnabled(control) {
     const eleId = control.Id
     switch (eleId) {
-        case "btnShowMsg":
+        case "denglu":
             return true
         // case "btnShowDialog":
         //     {
@@ -107,6 +117,11 @@ function OnGetEnabled(control) {
         //         return bFlag
         //     }
         case "menued":
+            {
+                let bFlag = wps.PluginStorage.getItem("EnableFlag")
+                return bFlag
+            }
+        case "logout":
             {
                 let bFlag = wps.PluginStorage.getItem("EnableFlag")
                 return bFlag
@@ -126,10 +141,10 @@ function OnGetVisible(control){
 function OnGetLabel(control){
     const eleId = control.Id
     switch (eleId) {
-        case "btnIsEnbable":
+        case "denglu":
             {
                 let bFlag = wps.PluginStorage.getItem("EnableFlag")
-                return bFlag ?  "按钮Disable" : "按钮Enable"
+                return bFlag ?  "登录" : "注销"
             }
         case "btnApiEvent":
             {

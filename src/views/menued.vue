@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<div>
-			<el-tree :data="dataMenu" show-checkbox node-key="name"   :props="defaultProps">
+			<el-tree :data="dataMenu" show-checkbox node-key="id"   :props="defaultProps">8
 			</el-tree>
 		</div>
-		<!-- <div id="app"> 
+		<div id="app"> 
 			<p v-for="i in dataMenu" :key='i'>{{i.name}}</p>
-		</div> -->
+		</div>
 	</div>	
 </template>
 
@@ -60,7 +60,7 @@
 				}],
 				defaultProps: {
 					children: 'children',
-					label:'name'
+					label: name
 				}
 			}
 			
@@ -84,7 +84,7 @@
 			axios.get('api/dpass/openApi/getApiList') //获取接口
 				.then(resp => {
 					// handle success
-					//console.log(resp);
+					/* console.log(resp); */
 					this.dataMenu = resp.data.result;
 					var data=this.dataMenu;
 					console.log(data);
@@ -105,4 +105,4 @@
 <style scoped>
 
 </style>
-t
+

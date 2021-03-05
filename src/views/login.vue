@@ -48,8 +48,11 @@ export default {
 			alert("登录成功");
 			localStorage.setItem("token", resp.data.result.token);//保存令牌
 			this.tiaozhuan("menued");//执行点击事件
-			wps.PluginStorage.setItem("EnableFlag", 1)
+			let bFlag = wps.PluginStorage.getItem("EnableFlag")
+            wps.PluginStorage.setItem("EnableFlag", !bFlag)
 			wps.ribbonUI.InvalidateControl("menued")
+			wps.ribbonUI.InvalidateControl("logout")
+			wps.ribbonUI.InvalidateControl("denglu")
 			window.opener=null;window.open('','_self');window.close();//关闭
 			
 			}else{
