@@ -17,7 +17,7 @@ Vue.config.productionTip = false
 Vue.config.token = ''
 Vue.prototype.$md5 = md5;
 axios.defaults.baseURL = ''
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 5500
 axios.defaults.withCredentials = false
 
 

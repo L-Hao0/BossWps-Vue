@@ -1,13 +1,11 @@
 <template>
 	<div>
 		<div>
-			<el-tree :data="dataMenu" show-checkbox node-key="id"   :props="defaultProps">8
+			<el-tree :data="dataMenu" show-checkbox node-key="id" :props="defaultProps">
 			</el-tree>
 		</div>
-		<div id="app"> 
-			<p v-for="i in dataMenu" :key='i'>{{i.name}}</p>
-		</div>
-	</div>	
+
+	</div>
 </template>
 
 <script>
@@ -25,18 +23,8 @@
 				dataMenu: [],
 				data: [{
 					id: 1,
-					label:'一级 2' ,
-					children: [{
-						id: 4,
-						label: '二级 1-1',
-						children: [{
-							id: 9,
-							label: '三级 1-1-1'
-						}, {
-							id: 10,
-							label: '三级 1-1-2'
-						}]
-					}]
+					label: '一级 1',
+					children: [{label: '一级 1'},{label: '一级 1'},{label: '一级 1'},{label: '一级 1'}]
 				}, {
 					id: 2,
 					label: '一级 2',
@@ -60,10 +48,10 @@
 				}],
 				defaultProps: {
 					children: 'children',
-					label: name
+					label: 'label'
 				}
 			}
-			
+
 		},
 		methods: {
 
@@ -86,8 +74,8 @@
 					// handle success
 					/* console.log(resp); */
 					this.dataMenu = resp.data.result;
-					var data=this.dataMenu;
-					console.log(data);
+					var data = this.dataMenu;
+					// console.log(data);
 					workSpaceOne.dataInterface(data);
 					//alert(resp.data.result[0].name)
 				})
@@ -95,7 +83,7 @@
 					// handle error
 					console.log(resp);
 				});
-			
+
 
 		}
 	}
@@ -105,4 +93,3 @@
 <style scoped>
 
 </style>
-
