@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-			<el-tree :data="dataMenu" show-checkbox node-key="apiId"   :props="defaultProps">
+			<el-tree :data="dataMenu" show-checkbox node-key="name"   :props="defaultProps">
 			</el-tree>
 		</div>
 		<!-- <div id="app"> 
@@ -14,6 +14,7 @@
 	/* 	import qs from 'qs' */
 	import axios from 'axios'
 	import Vue from 'vue';
+	import workSpaceOne from '../components/js/workSpaceOne.js'
 	export default {
 		name: 'menued',
 		data() {
@@ -85,7 +86,9 @@
 					// handle success
 					//console.log(resp);
 					this.dataMenu = resp.data.result;
-					
+					var data=this.dataMenu;
+					console.log(data);
+					workSpaceOne.dataInterface(data);
 					//alert(resp.data.result[0].name)
 				})
 				.catch(resp => {
